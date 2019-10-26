@@ -1,0 +1,47 @@
+
+<header class="clearfix">
+<!-- Start  Logo & Naviagtion  -->
+<div class="navbar navbar-default navbar-top">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Stat Toggle Nav Link For Mobiles -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <!-- End Toggle Nav Link For Mobiles -->
+            <a class="navbar-brand" href="index.html">Question Forum</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            
+            <!-- Start Navigation List -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="active" href="#">Home</a>
+                </li>
+                <li>
+                  <%= link_to 'Ask Question',home_add_question_path , method: "get"%>
+                    <!-- <a href="#">Ask Question</a> -->
+                </li>
+                <li>
+                  <%= link_to 'Questions',home_question_path , method: "get"%>
+                </li>
+                <% if current_user.present?%>
+                  <li>
+                  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+                </li>
+              <%else%>
+                <li>
+                    <%= link_to('Register', new_user_registration_path) %>
+                </li>
+                <li>
+                    <%= link_to('Login', new_user_session_path) %>  
+                </li>
+                <%end%>
+            </ul>
+            <!-- End Navigation List -->
+        </div>
+    </div>
+</div>
+<!-- End Header Logo & Naviagtion -->
+
+</header>

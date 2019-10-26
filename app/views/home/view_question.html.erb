@@ -1,0 +1,56 @@
+<%= render "header" %>
+<br>
+  <div class="container">
+      <div class="row">
+          <!-- Start Blog Body Section -->
+          <div class="col-md-8 blog-body">
+              <!-- Start Blog post -->
+              <div class="single-blog-post">
+                  <h1 class="post-title"><a href="#"><%=@question.title%></a></h1>
+                  <div class="post-meta">
+                      <ul class=" pull-left">
+                          <li><i class="fa fa-clock-o"></i><%=@question.created_at.strftime("%d-%m-%Y")%></li>
+                          <li><i class="fa fa-user"></i><%=@question.user.present? ? @question.user.name : ""%></li>
+                          <li><i class="fa fa-comments"></i> Comments <%=@question.comments.count%></li>
+                      </ul>
+                      <br>
+                  </div>
+                  <br>
+                  <h1>
+                  <%=@question.question_text%>
+                  </h1>
+              </div>
+            
+          </div>          
+      </div>
+  </div>
+  <div class="container">
+  <div class="row">
+  <h3>Comments</h3>
+  <br>
+  <%= form_for [@question, Comment.new] do |f| %>                         
+    <div class="row">
+        <div class="col-md-6">
+            <label for="comment">Add Your Comment</label>
+            <%= f.text_area :body, placeholder: "comment",required: true %><br/>
+            <%= f.hidden_field :user_id,value: current_user.nil? ? "" : current_user.id%>
+            <%= f.hidden_field :question_id,value: @question.nil? ? "" : @question.id%>
+            <%= f.submit "Add Comment",class: "btn btn-primary" %>
+        </div>
+    </div>
+<%end%>
+<br>
+<ul>
+    <li>
+        <div class="comment-box clearfix">
+            <div class="comment-content">
+                <div class="comment-meta">
+                <%= render @question.comments %>
+                </div>
+            </div>
+        </div>
+    </li>
+</li>
+</ul>
+</div>
+</div>

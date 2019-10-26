@@ -1,0 +1,27 @@
+  <li>
+    <h4><%= comment.body %> </h4><br>
+    <%= form_for [comment, Comment.new] do |f| %>
+      <div class="row">
+          <div class="col-md-6">
+              <label for="comment">Add Your Reply</label>
+              <%= f.text_area :body, placeholder: "Add a reply",required: true %><br/>
+              <%= f.hidden_field :user_id,value: current_user.nil? ? "" : current_user.id%>
+              <%= f.hidden_field :question_id,value: @question.nil? ? "" : @question.id%>
+              <%= f.submit "Reply",class: "btn btn-primary" %>
+          </div>
+      </div>
+    <%end%>
+    <br>
+  <ul>
+      <li>
+          <div class="comment-box clearfix">
+                  <div class="comment-content">
+                      <div class="comment-meta">
+                      <%= render comment.comments %>
+                      </div>
+                  </div>
+              </div>
+        </li>
+    </ul>
+
+  </li>

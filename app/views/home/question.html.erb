@@ -1,0 +1,28 @@
+<%= render "header" %>
+<br>
+<div class="col-md-12">
+<div class="row ">
+    <div class="blog-body">
+    <% if @question.present? %>
+       <% @question.each do |question| %>
+        <div class="blog-post col-md-5">
+            <h1 class="post-title"><%=question.question_text%></h1>
+            <ul class="post-meta">
+                <li>Date:  <%=question.created_at.strftime("%d-%m-%Y")%></li>
+                <li><%=question.user.present? ? question.user.name : ""%></li>
+                <li>Comments <%=question.comments.count%></li>
+            </ul>
+            <p class="post-content"><%=question.question_text%></p>
+
+            <%= link_to "Read more...",view_question_path(question.id),class:  "btn btn-primary readmore m-10"%>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <%end%>
+    <%else%>
+      <br>
+       <h2 class="text-center ">No questions available.</h2>
+    <%end%>
+    </div>
+</div>
+</div>
